@@ -52,3 +52,18 @@ for beginning_of_day in dop:
     nvda_usd = '${0:.2f}'.format(symbol_prices["NVDA"])
     goog_usd = '${0:.2f}'.format(symbol_prices["GOOG"])
     print(date, "|", fb_usd, "     |", aapl_usd, "     |", nvda_usd, "     |", goog_usd)
+
+#
+# WRITE TO csv
+#
+
+csv_file_path = r"C:\Users\Jason\Desktop\Freestyle_project\data\fangs_out.csv"
+
+headers = ["DATE", "FB", "AAPL", "NVDA", "GOOG"]
+
+with open(csv_file_path, "w") as csv_file:
+    writer = csv.DictWriter(csv_file, delimiter=',', fieldnames=headers)
+    writer.writeheader()
+    #writer.writerow(request)
+    for beginning_of_day in dop:
+        writer.writerow()
