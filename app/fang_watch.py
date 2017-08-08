@@ -1,6 +1,5 @@
 import pandas as pd
 import pandas_datareader
-import numpy as np
 from pandas_datareader import data
 from collections import OrderedDict
 import datetime
@@ -18,12 +17,10 @@ print("")
 
 # INFO TO BE REQUESTED
 
-products = []
-
 new_FANG = ['FB', 'AAPL', 'NVDA', 'GOOG']
 stocks_source = 'google'
 start = datetime.datetime(2017,1,1) # start = (datetime.date.today() - timedelta(days=5))
-end = datetime.date.today()
+end = datetime.datetime.now()
 
 request = data.DataReader(new_FANG, stocks_source, start, end)
 
@@ -61,19 +58,11 @@ for beginning_of_day in dop:
 # WRITE TO csv
 #
 
-#
-# t = datetime.datetime(2017,1,1)
-# t.strftime('%m/%d/%Y')
-
 csv_file_path = r"C:\Users\Jason\Desktop\Freestyle_project\data\fangs_out.csv"
 
 headers = ["DATE", "FB", "AAPL", "NVDA", "GOOG"]
 
-def csv_writer(beginning_of_day, csv_file_path):
-    with open(csv_file_path, "w", newline='') as csv_file:
-        writer = csv.DictWriter(csv_file, delimiter=',', fieldnames=headers)
-        writer.writeheader()
+df = pd.DataFrame(dop)
+sort_data = df.sort_index(axis=0)
 
-np.savetxt(csv_file_path, (date, fb_usd, aapl_usd, nvda_usd, goog_usd), delimiter=';') ## using numpy
-
-# df.to_csv(csv_file_path) ## using pandas DataFrame
+df.to_csv(csv_file_path, index=True)
