@@ -63,6 +63,5 @@ csv_file_path = r"C:\Users\Jason\Desktop\Freestyle_project\data\fangs_out.csv"
 headers = ["DATE", "FB", "AAPL", "NVDA", "GOOG"]
 
 df = pd.DataFrame(dop)
-sort_data = df.sort_index(axis=0)
 
 df.to_csv(csv_file_path, index=True)
